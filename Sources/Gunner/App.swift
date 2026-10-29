@@ -41,9 +41,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         popover.behavior = .applicationDefined
         popover.animates = true
-        popover.contentViewController = NSHostingController(
+        let hosting = NSHostingController(
             rootView: RootView(manager: manager, closePopover: { [weak self] in self?.closePopover() })
         )
+        // Fixed size, set before the first show. Otherwise the hosting controller
+        // reports its size only after the popover is on screen, the popover grows
+        // from its bottom edge, and the top slides up under the menu bar.
+        hosting.sizingOptions = []
+        popover.contentViewController = hosting
+        popover.contentSize = RootView.size
 
         observeStatus()
         manager.startOnLaunch()

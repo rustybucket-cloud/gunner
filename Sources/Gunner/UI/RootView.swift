@@ -9,6 +9,8 @@ enum Route: Hashable {
 /// The popover's content. A small hand-rolled router: NavigationStack's
 /// toolbar doesn't fit a popover this size.
 struct RootView: View {
+    static let size = CGSize(width: 400, height: 560)
+
     let manager: ProcessManager
     let closePopover: () -> Void
     @State private var route: Route
@@ -35,7 +37,7 @@ struct RootView: View {
                     .id(id) // Fresh form state per process.
             }
         }
-        .frame(width: 400, height: 560)
+        .frame(width: Self.size.width, height: Self.size.height)
         .onExitCommand(perform: back)
         .background {
             // Hidden buttons for keyboard shortcuts.
