@@ -1,4 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#2563eb"/>
-  <text x="32" y="32" dy="0.35em" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#ffffff">G</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="olive" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7d8c55"/>
+      <stop offset="1" stop-color="#3e4828"/>
+    </linearGradient>
+    <!-- Body sits on Apple's macOS icon grid: 824pt squircle centered in 1024. -->
+    <clipPath id="body">
+      <rect x="100" y="100" width="824" height="824" rx="185"/>
+    </clipPath>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#olive)"/>
+  <!-- WWII gun ring sight, simplified to stay legible at 16pt: two rings, four spokes, mounting post, aiming bead. -->
+  <g clip-path="url(#body)" fill="none" stroke="#f1ead2">
+    <circle cx="512" cy="480" r="290" stroke-width="56"/>
+    <circle cx="512" cy="480" r="130" stroke-width="44"/>
+    <path d="M512 190V350M512 610V770M222 480H382M642 480H802" stroke-width="44"/>
+    <path d="M512 770V960" stroke-width="72"/>
+  </g>
+  <circle cx="512" cy="480" r="44" fill="#f59e0b"/>
+  <rect x="102" y="102" width="820" height="820" rx="183" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="4"/>
 </svg>
