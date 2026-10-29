@@ -35,6 +35,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             button.target = self
             button.action = #selector(statusItemClicked)
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+            // The title (running count) resizes the status item, which can happen while
+            // the popover is open. Re-anchor it, or it jumps to a stale position.
+            button.postsFrameChangedNotifications = true
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(statusButtonFrameChanged),
+                name: NSView.frameDidChangeNotification, object: button
+            )
         }
 
         popover.behavior = .applicationDefined
@@ -89,6 +96,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         outsideClickMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { _ in
             MainActor.assumeIsolated { self.closePopover() }
         }
+    }
+
+    @objc private func statusButtonFrameChanged() {
+        guard popover.isShown, let button = statusItem.button else { return }
+        popover.positioningRect = button.bounds
     }
 
     private func closePopover() {
