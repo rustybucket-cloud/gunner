@@ -30,9 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.mainMenu = makeMainMenu()
 
         if let button = statusItem.button {
-            let image = NSImage(systemSymbolName: "terminal", accessibilityDescription: "Gunner")
-            image?.isTemplate = true
-            button.image = image
+            button.image = MenuBarIcon.make()
             button.imagePosition = .imageLeading
             button.target = self
             button.action = #selector(statusItemClicked)
